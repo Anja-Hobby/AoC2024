@@ -1,11 +1,11 @@
-package Day1;
+package days;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import Basics.AoCReader;
 
-public class ListChecker {
+public class day1 {
 	// main class
 	public static void main(String[] args) {
 		try {
