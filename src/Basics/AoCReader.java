@@ -24,6 +24,69 @@ public class AoCReader {
 		br.close();
 		return lines;
 	}
+
+	/**
+	 * Get the file from disk, but get the input as columns instead of rows.
+	 * @param filePath
+	 * @return
+	 * @throws Exception
+	 */
+	public static ArrayList<String> readColumns(String filePath) throws Exception {
+		ArrayList<String> lines = readLines(filePath);
+		ArrayList<String> columns = new ArrayList<>();
+		for (int i = 0 ; i<lines.size(); i++) {
+			String column = "";
+			for (String line : lines ) {
+				column = column + line.charAt(i);
+			}
+			columns.add(column);
+		}
+		return columns;
+	}
+	
+	/**
+	 * Get the file contents diagonally.
+	 * @param filePath
+	 * @return A list of strings representing the diagonals.
+	 * @throws Exception
+	 */
+	public static ArrayList<String> readDiagonals(String filePath) throws Exception {
+	    ArrayList<String> lines = readLines(filePath);
+	    ArrayList<String> diagonals = new ArrayList<>();
+	    int rows = lines.size();
+	    int cols = lines.get(0).length();
+
+	    // Top-left to bottom-right diagonals
+	    for (int start = 0; start < rows + cols - 1; start++) {
+	        StringBuilder diagonal = new StringBuilder();
+	        for (int i = 0; i <= start; i++) {
+	            int row = i;
+	            int col = start - i;
+	            if (row < rows && col < cols) {
+	                diagonal.append(lines.get(row).charAt(col));
+	            }
+	        }
+	        if (diagonal.length() > 0) {
+	            diagonals.add(diagonal.toString());
+	        }
+	    }
+	    // Top-right to bottom-left diagonals
+	    for (int start = 0; start < rows + cols - 1; start++) {
+	        StringBuilder diagonal = new StringBuilder();
+	        for (int i = 0; i <= start; i++) {
+	            int row = i;
+	            int col = cols - 1 - (start - i);
+	            if (row < rows && col >= 0) {
+	                diagonal.append(lines.get(row).charAt(col));
+	            }
+	        }
+	        if (diagonal.length() > 0) {
+	            diagonals.add(diagonal.toString());
+	        }
+	    }
+
+	    return diagonals;
+	}
 	
 	/**
 	 * Get the numbers (not digits!) from every line in a separate ArrayList.
@@ -46,7 +109,7 @@ public class AoCReader {
 		}
 		return allNumbers;
 	}
-	
+
 	/**
 	 * Get the numbers (not digits!) from every column in a separate ArrayList. (Assumes the same amount of datapoints in every line)
 	 * @param filePath
