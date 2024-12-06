@@ -8,7 +8,6 @@ import Basics.AoCReader;
 import Basics.Checkers;
 
 public class day3 {
-	static Pattern firstNum = Pattern.compile("\\d{1,3},");
 	public static void main(String[] args) {
 		try {
 			// Obtain the list
